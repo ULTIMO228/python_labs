@@ -77,7 +77,7 @@ print(sum(len(i) for i in fio)+2)
 
 Результат выполнения:
 
-![Результат выполнения задания 5](images/lab01/05_initials_and_len.png)
+![Результат выполнения задания 5](images/lab01/s.png)
 
 
 ### Задание 6:
