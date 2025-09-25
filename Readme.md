@@ -72,8 +72,9 @@ I = ''
 for i in range(3):
     I += fio[i][0]
 print(f"Инициалы: {I}.")
-print(sum(len(i) for i in fio))
+print(sum(len(i) for i in fio)+2)
 ```
+
 Результат выполнения:
 
 ![Результат выполнения задания 5](images/lab01/05_initials_and_len.png)
