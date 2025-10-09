@@ -116,3 +116,116 @@ print(ans)
 Результат выполнения:
 
 ![Результат выполнения задания 1](images/lab01/ex_07.png)
+
+
+# Лабораторная работа 2
+### Задание 1:
+
+```python
+def min_max(nums):
+    if nums==[]:
+        return 'ValueError'
+    else:
+        return (min(nums),max(nums))
+
+def unique_sorted(nums):
+    return sorted(set(nums), reverse=False)
+def flatten(mat):
+    new_mat = []
+    for i in mat:
+        for j in i:
+            if type(j) == str:
+                return 'TypeError'
+            new_mat.append(j)
+    return (new_mat)
+```
+
+Результат выполнения:
+
+![Результат выполнения задания 6](images/lab02/arrays.png)
+
+### Задание 2:
+
+```python
+
+def transpose(mat):
+    if len(mat) == 0:
+        return []
+    elif len(mat) == 1:
+        b = [[] for _ in range(len(mat[0]))]
+        for i in range(len(mat[0])):
+            b[i] += [(mat[0][i])]
+        return b
+    elif all(len(mat[i]) == 1 for i in range(len(mat))):
+        c = [[]]
+        for k in mat:
+            c[0] += k
+        return c
+    elif all(len(mat[i]) == len(mat[i + 1]) for i in range(len(mat[0]) - 1)):
+        a = [[] for _ in range(len(mat))]
+        for k in range(len(mat)):
+            for i in range(len(mat[0])):
+                a[k] += [mat[i][k]]
+        return a
+    else:
+        return 'ValueError'
+
+def row_sums(mat):
+    k = len(mat[0])
+    ans = []
+    for i in mat:
+        if k == len(i):
+            ans.append(sum(i))
+        else:
+            return 'ValueError'
+    return ans
+
+def col_sums(mat):
+    ans = [0]*len(mat[0])
+    k = len(mat[0])
+    for i in range(len(mat)):
+        if k==len(mat[i]):
+            for j in range(len(mat[i])):
+                ans[j]+=mat[i][j]
+        else:
+            return 'ValueError'
+    return ans
+```
+
+Результат выполнения:
+
+![Результат выполнения задания 6](images/lab02/matrix.png)
+
+### Задание 3:
+
+```python
+fio_new = ''
+flag1 = False
+len_fio = 0
+gpa = float
+s = input().replace('(','').replace(')','').split(', ')
+for i in s:
+    if i == '':
+        s.append('musor')
+if len(s) == 3:
+    fio_old = s[0].replace('''"''','').split(' ')
+    for i in fio_old:
+        if i != '' and flag1 == False:
+            fio_new += str(i.capitalize())+' '
+            len_fio+=1
+            flag1 = True
+        elif flag1 == True and i!='':
+            fio_new += str(i.capitalize()[0]) + '.'
+            len_fio+=1
+    group = s[1].replace('''"''','')
+    gpa = float(s[2])
+    if 3>=len_fio>=2:
+        print(f'''"{fio_new}, гр. {group}, GPA {gpa:.2f}"''')
+    else:
+        print('ValueError')
+else: print('ValueError')
+```
+
+Результат выполнения:
+
+![Результат выполнения задания 6](images/lab02/tuples.png)
