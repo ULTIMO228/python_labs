@@ -604,7 +604,7 @@ if __name__ == "__main__":
         print(f"Ошибка: {e}")
 ```
 
-Результат работы функции csv_to_xlsx
+Результат работы функции csv2xlsx
 
 Входной файл [people.csv](src/lab05/data/people.csv)
 Выходной [people.xlsx](src/lab05/data/people.xlsx)
