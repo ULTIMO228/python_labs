@@ -598,7 +598,10 @@ def csv2xlsx(csv_path: str, xlsx_path:str):
     wb.save(xlsx_path)
 
 if __name__ == "__main__":
-    csv2xlsx()
+    try:
+        csv2xlsx('data/people.csv', 'data/people.xlsx')
+    except Exception as e:
+        print(f"Ошибка: {e}")
 ```
 
 Результат работы функции csv_to_xlsx
