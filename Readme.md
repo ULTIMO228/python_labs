@@ -931,4 +931,4 @@ def test_csv_to_json(csv_file, tmp_path):
 
 
 # Результат выполнения:
-[...](images/lab07/tests.png)
+![tests](images/lab07/tests.png)
