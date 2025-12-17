@@ -612,7 +612,7 @@ if __name__ == "__main__":
 
 # Лабораторная работа 6:
 
-# Задание 1:
+### Задание 1:
 
 ```python
 import argparse
@@ -707,7 +707,7 @@ if __name__ == "__main__":
 
         Входной файл people.xlsx
 
-# Задание 2:
+### Задание 2:
 
 ```python
 import argparse
@@ -801,9 +801,9 @@ if __name__ == "__main__":
 Вывод [...](images/lab06/out_cat.png)
 
 
-# Лабораторная работа №6
+# Лабораторная работа №7
 
-# Задание 1:
+### Задание 1:
 КОД:
 
 ```python
@@ -868,7 +868,7 @@ def test_top_n(freq, n, expected):
     assert top_n(freq, n) == expected
 ```
 
-# Задание 2:
+### Задание 2:
 
 КОД:
 ```python
