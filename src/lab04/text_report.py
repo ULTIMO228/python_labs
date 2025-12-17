@@ -14,11 +14,17 @@ def frequencies_from_text(text: str) -> dict[str, int]:
 
 def main():
     parser = argparse.ArgumentParser(description="Генерация частотного отчета.")
-    parser.add_argument('--in', dest='in_files', nargs='+', required=True, help="Входные файлы")
-    parser.add_argument('--out', dest='out_file', default='data/lab04/report.csv', help="Выходной файл")
-    parser.add_argument('--encoding', default='utf-8', help="Кодировка")
-    parser.add_argument('--per-file', dest='per_file_report', help="Отчет по каждому файлу")
-    parser.add_argument('--total', dest='total_report', help="Сводный отчет")
+    parser.add_argument(
+        "--in", dest="in_files", nargs="+", required=True, help="Входные файлы"
+    )
+    parser.add_argument(
+        "--out", dest="out_file", default="data/lab04/report.csv", help="Выходной файл"
+    )
+    parser.add_argument("--encoding", default="utf-8", help="Кодировка")
+    parser.add_argument(
+        "--per-file", dest="per_file_report", help="Отчет по каждому файлу"
+    )
+    parser.add_argument("--total", dest="total_report", help="Сводный отчет")
     args = parser.parse_args()
 
     if len(args.in_files) == 1:
@@ -27,7 +33,9 @@ def main():
         if not args.per_file_report or not args.total_report:
             print("Ошибка: укажите --per-file и --total", file=sys.stderr)
             sys.exit(1)
-        process_multiple_files(args.in_files, args.per_file_report, args.total_report, args.encoding)
+        process_multiple_files(
+            args.in_files, args.per_file_report, args.total_report, args.encoding
+        )
 
 
 def process_single_file(in_path: str, out_path: str, encoding: str):
@@ -53,7 +61,9 @@ def process_single_file(in_path: str, out_path: str, encoding: str):
             print(f"{word}: {count}")
 
 
-def process_multiple_files(in_paths: list[str], per_file_path: str, total_path: str, encoding: str):
+def process_multiple_files(
+    in_paths: list[str], per_file_path: str, total_path: str, encoding: str
+):
     total_freq = Counter()
     per_file_rows = []
 
@@ -79,5 +89,5 @@ def process_multiple_files(in_paths: list[str], per_file_path: str, total_path: 
     print(f"Сводный отчет: {total_path}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

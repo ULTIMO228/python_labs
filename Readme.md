@@ -799,3 +799,136 @@ if __name__ == "__main__":
 Входной файл input.txt
 
 Вывод [...](images/lab06/out_cat.png)
+
+
+# Лабораторная работа №6
+
+# Задание 1:
+КОД:
+
+```python
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("ПрИвЕт\nМИр\t", "привет мир"),
+        ("ёжик, Ёлка", "ежик, елка"),
+        ("Hello\r\nWorld", "hello world"),
+        ("  двойные   пробелы  ", "двойные пробелы"),
+        ("", ""),
+        ("   ", ""),
+        ("Simple Text", "simple text"),
+    ],
+)
+def test_normalize(text, expected):
+    assert normalize(text, True, True) == expected
+
+
+@pytest.mark.parametrize(
+    "text, expected",
+    [
+        ("привет мир", ["привет", "мир"]),
+        ("hello,world!!!", ["hello", "world"]),
+        ("по-настоящему круто", ["по-настоящему", "круто"]),
+        ("2025 год", ["2025", "год"]),
+        ("emoji 😀 не слово", ["emoji", "не", "слово"]),
+        ("", []),
+        ("!!! ... ,,,", []),
+    ],
+)
+def test_tokenize(text, expected):
+    assert tokenize(text) == expected
+
+
+@pytest.mark.parametrize(
+    "tokens, expected",
+    [
+        (["a", "b", "a", "c", "b", "a"], {"a": 3, "b": 2, "c": 1}),
+        (["bb", "aa", "bb", "aa", "cc"], {"aa": 2, "bb": 2, "cc": 1}),
+        ([], {}),
+        (["word"], {"word": 1}),
+        (["a", "a", "a"], {"a": 3}),
+    ],
+)
+def test_count_freq(tokens, expected):
+    assert count_freq(tokens) == expected
+
+
+@pytest.mark.parametrize(
+    "freq, n, expected",
+    [
+        ({"a": 3, "b": 2, "c": 1}, 2, [("a", 3), ("b", 2)]),
+        ({"aa": 2, "bb": 2, "cc": 1}, 2, [("aa", 2), ("bb", 2)]),
+        ({"banana": 1, "apple": 1}, 2, [("apple", 1), ("banana", 1)]),
+        ({}, 5, []),
+        ({"a": 10}, 0, []),
+        ({"a": 5}, 10, [("a", 5)]),
+    ],
+)
+def test_top_n(freq, n, expected):
+    assert top_n(freq, n) == expected
+```
+
+# Задание 2:
+
+КОД:
+```python
+import csv
+import json
+import pytest
+from src.lab05.json_csv import csv_to_json, json_to_csv
+
+
+@pytest.fixture
+def json_file(tmp_path):
+    json_file = tmp_path / "people.json"
+    data = [
+        {"name": "Alice", "age": 25, "city": "Moscow"},
+    ]
+    with open(json_file, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False)
+    return json_file
+
+
+def test_json_to_csv(json_file, tmp_path):
+    csv_output = tmp_path / "output.csv"
+    json_to_csv(str(json_file), str(csv_output))
+    assert csv_output.exists()
+    with open(csv_output, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+        assert reader.fieldnames == ["name", "age", "city"]
+        assert rows[0]["name"] == "Alice"
+        assert rows[0]["age"] == "25"
+        assert rows[0]["city"] == "Moscow"
+
+
+@pytest.fixture
+def csv_file(tmp_path):
+    """Фикстура создает тестовый CSV файл"""
+    csv_file = tmp_path / "people.csv"
+    data = [
+        {"name": "Alice", "age": "25", "city": "Moscow"},
+    ]
+    with open(csv_file, "w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["name", "age", "city"])
+        writer.writeheader()
+        writer.writerows(data)
+    return csv_file
+
+
+def test_csv_to_json(csv_file, tmp_path):
+    """Тест конвертации CSV в JSON"""
+    json_output = tmp_path / "output.json"
+    csv_to_json(str(csv_file), str(json_output))
+    assert json_output.exists()
+    with open(json_output, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        assert data[0]["name"] == "Alice"
+        assert data[0]["age"] == "25"
+        assert data[0]["city"] == "Moscow"
+
+```
+
+
+# Результат выполнения:
+[tests](images/lab07/tests.png)

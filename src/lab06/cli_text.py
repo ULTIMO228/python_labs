@@ -2,6 +2,8 @@ import argparse
 import sys
 
 from src.lab03.text import count_freq, normalize, tokenize, top_n
+
+
 def read_text_file(file_path):
     try:
         with open(file_path, "r", encoding="utf-8") as f:

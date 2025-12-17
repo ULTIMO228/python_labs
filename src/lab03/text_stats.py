@@ -5,14 +5,13 @@ import io
 PRETTY_TABLE_OUTPUT = True
 
 try:
-    sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8')
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+    sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding="utf-8")
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8")
 except TypeError:
     pass
 
 from text import normalize, tokenize, count_freq, top_n
-
 
 
 def print_simple_output(total, unique, top_words):

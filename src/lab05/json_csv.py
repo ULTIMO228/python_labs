@@ -1,7 +1,8 @@
 from pathlib import Path
 import json
 import csv
-from typing import List,Dict,Any
+from typing import List, Dict, Any
+
 
 def check_file_found(path: str) -> Path:
     p = Path(path)
@@ -9,7 +10,8 @@ def check_file_found(path: str) -> Path:
         raise FileNotFoundError(f"File not found: {path}")
     return p
 
-def load_json(path: str)-> List[Dict[str, Any]]:
+
+def load_json(path: str) -> List[Dict[str, Any]]:
     p = check_file_found(path)
     text = p.read_text(encoding="utf-8")
     if text.strip() == "":
@@ -18,7 +20,11 @@ def load_json(path: str)-> List[Dict[str, Any]]:
         data = json.loads(text)
     except json.JSONDecodeError:
         raise ValueError
-    if not isinstance(data,list) or len(data)==0 or not all(isinstance(item,dict) for item in data):
+    if (
+        not isinstance(data, list)
+        or len(data) == 0
+        or not all(isinstance(item, dict) for item in data)
+    ):
         raise ValueError
     return data
 
@@ -33,7 +39,8 @@ def json_to_csv(json_path: str, csv_path: str) -> None:
         for row in data:
             writer.writerow({k: row.get(k, "") for k in fieldnames})
 
-def csv_to_json(csv_path:str, json_path: str) -> None:
+
+def csv_to_json(csv_path: str, json_path: str) -> None:
     p = check_file_found(csv_path)
     with p.open("r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
@@ -43,6 +50,7 @@ def csv_to_json(csv_path:str, json_path: str) -> None:
     out = Path(json_path)
     with out.open("w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
 
 if __name__ == "__main__":
     try:
