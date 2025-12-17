@@ -1086,7 +1086,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-# Вывод в консоль
+### Вывод в консоль
 ![](images/laba08/main.png)
-# Вывод в json
+### Вывод в json
 ![](images/laba08/file.png)
